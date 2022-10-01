@@ -1,8 +1,9 @@
 extends Node2D
 
-var seconds = 0 setget update_counter
+var seconds = 9 setget update_counter
 onready var blanks = $scroll/blanks
 onready var counter_label = $ui/Control/amount
+onready var scroll = $scroll
 var state = "play"
 
 # Called when the node enters the scene tree for the first time.
@@ -15,6 +16,10 @@ func update_counter(new):
 	counter_label.text = str(new)
 	
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func open_scroll():
+	scroll.visible = true
+	state = "scroll"
+	
+func finish_scroll():
+	scroll.visible = false
+	state = "play"

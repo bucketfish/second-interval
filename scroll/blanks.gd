@@ -7,6 +7,7 @@ var notepos =  [0, 1, 2, 1, 0, -1, -2, -3, 0, 1, 0, 1, 2, 1, 0, 4, 5, 4, 3, 2, 1
 var toput = preload("res://scroll/toput.tscn")
 var fly = preload("res://scroll/fly.tscn")
 onready var flypos = $"../flypos"
+onready var base = get_node("/root/base")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -22,10 +23,21 @@ func _ready():
 	get_node("note0").can_put = true
 
 func _on_toput_put_note(note_num):
+	var noterange = get_range(notevals[note_num-1], notevals[note_num])
+	
+	if base.seconds < noterange.size():
+		base.finish_scroll()
+		return
+	
+	if note_num < 22:
+		get_node("note" + str(note_num + 1)).can_put = true
+		
+		
 	if note_num != 0:
 		# ok get the range of nums between the values.... hm
 		var flies = []
-		for num in get_range(notevals[note_num-1], notevals[note_num]):
+		
+		for num in noterange:
 			var cur = fly.instance()
 			add_child(cur)
 			cur.global_position = flypos.global_position
@@ -33,6 +45,7 @@ func _on_toput_put_note(note_num):
 			
 			var tween = get_tree().create_tween()
 			tween.tween_property(cur, "global_position", get_node("../pos/" + str(num)).global_position, 0.2)
+			base.seconds -= 1
 			yield(tween, "finished")
 			
 		for cur in flies:
@@ -51,9 +64,7 @@ func _on_toput_put_note(note_num):
 		
 	get_node("note" + str(note_num)).put()
 	
-	if note_num < 22:
-		get_node("note" + str(note_num + 1)).can_put = true
-		
+
 
 func get_range(x, y): # 3 -4 -> [2 1 0 -1 -2 -3 -4]
 	var ans = []

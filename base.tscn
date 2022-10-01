@@ -908,6 +908,7 @@ align = 2
 valign = 1
 
 [node name="scroll" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="flypos" type="Position2D" parent="scroll"]
 position = Vector2( 969, 64 )
@@ -1079,7 +1080,7 @@ position = Vector2( 1445, -16 )
 [node name="player" type="KinematicBody2D" parent="." groups=["player"]]
 light_mask = 2
 material = SubResource( 60 )
-position = Vector2( -10675, 821 )
+position = Vector2( -6996, 87 )
 script = ExtResource( 15 )
 
 [node name="raycasts" type="Node2D" parent="player"]
@@ -1105,7 +1106,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 5
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]

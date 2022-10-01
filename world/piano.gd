@@ -5,6 +5,8 @@ extends Node2D
 # var a = 2
 # var b = "text"
 
+onready var base = get_node("/root/base")
+var taken = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,3 +16,9 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
+
+
+func _on_Area2D_body_entered(body):
+	if body.is_in_group("player") && taken == false:
+		base.open_scroll()
+		taken = true
