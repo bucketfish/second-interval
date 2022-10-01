@@ -892,14 +892,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 
 [node name="Note" type="Sprite" parent="ui/Control"]
-position = Vector2( 954, 73 )
+position = Vector2( 978, 48 )
+scale = Vector2( 0.75, 0.75 )
 texture = ExtResource( 3 )
 
 [node name="amount" type="Label" parent="ui/Control"]
-margin_left = 881.0
-margin_top = 48.0
-margin_right = 921.0
-margin_bottom = 114.0
+margin_left = 905.0
+margin_top = 27.0
+margin_right = 945.0
+margin_bottom = 93.0
 grow_horizontal = 0
 custom_fonts/font = SubResource( 1 )
 text = "0"
@@ -907,7 +908,9 @@ align = 2
 valign = 1
 
 [node name="scroll" type="CanvasLayer" parent="."]
-visible = false
+
+[node name="flypos" type="Position2D" parent="scroll"]
+position = Vector2( 969, 64 )
 
 [node name="Control" type="Control" parent="scroll"]
 anchor_right = 1.0
@@ -921,6 +924,65 @@ centered = false
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 4 )
+
+[node name="pos" type="Node2D" parent="scroll"]
+
+[node name="0" type="Position2D" parent="scroll/pos"]
+position = Vector2( 175, 347 )
+
+[node name="1" type="Position2D" parent="scroll/pos"]
+position = Vector2( 138, 329 )
+
+[node name="2" type="Position2D" parent="scroll/pos"]
+position = Vector2( 176, 309 )
+
+[node name="3" type="Position2D" parent="scroll/pos"]
+position = Vector2( 139, 289 )
+
+[node name="4" type="Position2D" parent="scroll/pos"]
+position = Vector2( 175, 271 )
+
+[node name="5" type="Position2D" parent="scroll/pos"]
+position = Vector2( 175, 236 )
+
+[node name="6" type="Position2D" parent="scroll/pos"]
+position = Vector2( 138, 219 )
+
+[node name="7" type="Position2D" parent="scroll/pos"]
+position = Vector2( 175, 199 )
+
+[node name="8" type="Position2D" parent="scroll/pos"]
+position = Vector2( 138, 179 )
+
+[node name="9" type="Position2D" parent="scroll/pos"]
+position = Vector2( 174, 157 )
+
+[node name="10" type="Position2D" parent="scroll/pos"]
+position = Vector2( 138, 136 )
+
+[node name="11" type="Position2D" parent="scroll/pos"]
+position = Vector2( 174, 117 )
+
+[node name="-1" type="Position2D" parent="scroll/pos"]
+position = Vector2( 175, 382 )
+
+[node name="-2" type="Position2D" parent="scroll/pos"]
+position = Vector2( 139, 399 )
+
+[node name="-3" type="Position2D" parent="scroll/pos"]
+position = Vector2( 176, 419 )
+
+[node name="-4" type="Position2D" parent="scroll/pos"]
+position = Vector2( 140, 441 )
+
+[node name="-5" type="Position2D" parent="scroll/pos"]
+position = Vector2( 176, 463 )
+
+[node name="-6" type="Position2D" parent="scroll/pos"]
+position = Vector2( 139, 483 )
+
+[node name="-7" type="Position2D" parent="scroll/pos"]
+position = Vector2( 176, 499 )
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
@@ -1043,7 +1105,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 2
+frame = 5
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]

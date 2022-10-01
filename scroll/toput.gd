@@ -13,13 +13,15 @@ onready var blanks = get_node("/root/base/scroll/blanks")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	print(note_val)
 	connect("put_note", blanks, "_on_toput_put_note")
 
 
 func _on_TextureButton_pressed():
 	if can_put:
-		anim.play("put")
+		
 		emit_signal("put_note", note_num)
+		
+func put():
+	anim.play("put")
 	
 
