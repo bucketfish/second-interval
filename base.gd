@@ -27,12 +27,21 @@ onready var particles = $scroll/Particles2D
 onready var endingaudio = $ending
 
 onready var cutscenes = $cutscenes
+
+onready var notesound = $notesound
+
+var rng = RandomNumberGenerator.new()
+var notesounds = [preload("res://audio/pickup/1.wav"), preload("res://audio/pickup/2.wav"), preload("res://audio/pickup/3.wav"), preload("res://audio/pickup/4.wav")]
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	rng.randomize()
 	ofparticle.modulate = colors[curpiano + 1]
 	player.global_position = startpos.global_position
+	scroll.visible = false
+	
 	cutscenes.open_cutscene()
 	state = "listen"
+	
 	
 
 func _input(event):
@@ -79,3 +88,7 @@ func finish_scroll():
 		audiotween.interpolate_property(backaudio, "volume_db", -50, -7, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		audiotween.start()
 
+
+func play_note_sound():
+	notesound.stream = notesounds[rng.randi_range(0, 3)]
+	notesound.play()

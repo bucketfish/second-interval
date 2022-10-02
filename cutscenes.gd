@@ -9,15 +9,26 @@ var cur = 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$end.visible = false
-	pass # Replace with function body.
+	
 
 
 func open_cutscene():
 	visible = true
+	$menu.visible = true
+	beginanim.play("start")
+	yield(self, "keypress")
+	
+	base.fade.play("fade")
+	yield(base.fade, "animation_finished")
+	$menu.visible = false
+		
+	base.fade.play_backwards("fade")
+
 	
 	while cur < 5:
 		beginanim.play(str(cur))
 		cur += 1
+		yield(get_tree().create_timer(0.1), "timeout")
 		yield(self, "keypress")
 		
 	if cur == 5:
@@ -35,17 +46,22 @@ func end_cutscene():
 	base.fade.play("fade")
 	yield(base.fade, "animation_finished")
 	visible = true
+	
+	endanim.play("0")
 		
 	base.state = "listen"
 	base.fade.play_backwards("fade")
 	yield(base.fade, "animation_finished")
 
 	
-	cur = 0
+	yield(self, "keypress")
+	
+	cur = 1
 	
 	while cur < 3:
 		endanim.play(str(cur))
 		cur += 1
+		yield(get_tree().create_timer(0.1), "timeout")
 		yield(self, "keypress")
 		
 	if cur == 3:

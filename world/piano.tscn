@@ -95,7 +95,7 @@ margin_top = 31.0
 margin_right = -112.0
 margin_bottom = 100.0
 custom_fonts/font = SubResource( 3 )
-text = "you don't have eveyrthing yet!"
+text = "you don't have everything yet!"
 align = 1
 autowrap = true
 

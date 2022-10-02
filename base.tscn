@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=2]
+[gd_scene load_steps=165 format=2]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/scroll.png" type="Texture" id=2]
@@ -30,6 +30,7 @@
 [ext_resource path="res://cutscenes.gd" type="Script" id=28]
 [ext_resource path="res://assets/cutscenes/opening.png" type="Texture" id=29]
 [ext_resource path="res://assets/cutscenes/ending.png" type="Texture" id=30]
+[ext_resource path="res://assets/interface/put.png" type="Texture" id=31]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -52,6 +53,10 @@ angle_random = 0.2
 scale = 0.9
 scale_random = 0.61
 scale_curve = SubResource( 114 )
+
+[sub_resource type="DynamicFont" id=131]
+size = 32
+font_data = ExtResource( 5 )
 
 [sub_resource type="TileSet" id=59]
 0/name = "backg.png 0"
@@ -1513,6 +1518,10 @@ color_ramp = SubResource( 57 )
 [sub_resource type="RectangleShape2D" id=116]
 extents = Vector2( 50, 1423.5 )
 
+[sub_resource type="DynamicFont" id=132]
+size = 100
+font_data = ExtResource( 5 )
+
 [sub_resource type="Animation" id=117]
 resource_name = "0"
 length = 0.3
@@ -1826,6 +1835,48 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=133]
+resource_name = "start"
+length = 0.6
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath("begin:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.308125, 0.45 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 11, 12, 11, 12 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "press any key to start" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Label:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 352, 459 ), Vector2( 352, 468 ) ]
+}
+
 [sub_resource type="Animation" id=127]
 resource_name = "0"
 length = 0.3
@@ -2069,6 +2120,8 @@ stream = ExtResource( 26 )
 
 [node name="pianoaudio" type="AudioStreamPlayer" parent="."]
 
+[node name="notesound" type="AudioStreamPlayer" parent="."]
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="ui"]
@@ -2188,10 +2241,22 @@ position = Vector2( 176, 499 )
 
 [node name="Particles2D" type="Particles2D" parent="scroll"]
 visible = false
-position = Vector2( 208, 191 )
+position = Vector2( 660, 331 )
+amount = 4
 local_coords = false
 process_material = SubResource( 115 )
 texture = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="scroll"]
+margin_left = 304.0
+margin_top = 526.0
+margin_right = 814.0
+margin_bottom = 559.0
+custom_colors/font_color = Color( 0.290196, 0.25098, 0.388235, 1 )
+custom_fonts/font = SubResource( 131 )
+text = "(click on the notes to restore them)"
+align = 1
+valign = 1
 
 [node name="backg" type="TileMap" parent="."]
 position = Vector2( 0, 10 )
@@ -2497,7 +2562,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 2
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -2581,7 +2646,35 @@ centered = false
 hframes = 4
 vframes = 4
 
+[node name="menu" type="Node2D" parent="cutscenes"]
+
+[node name="name" type="Label" parent="cutscenes/menu"]
+margin_left = 230.0
+margin_top = 173.0
+margin_right = 908.0
+margin_bottom = 380.0
+custom_colors/font_color = Color( 0.290196, 0.25098, 0.388235, 1 )
+custom_colors/font_color_shadow = Color( 1, 0.839216, 0.839216, 1 )
+custom_constants/shadow_offset_x = 6
+custom_constants/shadow_offset_y = 6
+custom_fonts/font = SubResource( 132 )
+text = "second
+       interval"
+
+[node name="Note" type="Sprite" parent="cutscenes/menu"]
+position = Vector2( 824, 394 )
+rotation = 0.198796
+scale = Vector2( 2, 2 )
+texture = ExtResource( 3 )
+
+[node name="Put" type="Sprite" parent="cutscenes/menu"]
+position = Vector2( 280, 342 )
+rotation = -0.301369
+scale = Vector2( 2, 2 )
+texture = ExtResource( 31 )
+
 [node name="beginanim" type="AnimationPlayer" parent="cutscenes"]
+autoplay = "start"
 anims/0 = SubResource( 117 )
 anims/1 = SubResource( 118 )
 anims/2 = SubResource( 119 )
@@ -2589,6 +2682,7 @@ anims/3 = SubResource( 120 )
 anims/4 = SubResource( 121 )
 anims/RESET = SubResource( 122 )
 anims/fade = SubResource( 124 )
+anims/start = SubResource( 133 )
 
 [node name="endanim" type="AnimationPlayer" parent="cutscenes"]
 root_node = NodePath("../end")
@@ -2609,7 +2703,7 @@ frame = 1
 margin_left = 609.0
 margin_top = 335.0
 margin_right = 937.0
-margin_bottom = 476.0
+margin_bottom = 476.002
 custom_fonts/font = SubResource( 123 )
 align = 1
 autowrap = true
