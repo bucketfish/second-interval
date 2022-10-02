@@ -39,6 +39,7 @@ func _input(event):
 	if Input.is_action_pressed("a"):
 		update_counter(10)
 		update_of(10)
+		player.global_position.x += 500
 
 func update_counter(new):
 	seconds = new
@@ -66,6 +67,7 @@ func finish_scroll():
 	yield(pianoaudio, "finished")
 	if curpiano == 4:
 		endingaudio.play()
+		cutscenes.end_cutscene()
 	else:
 		scroll.visible = false
 		particles.visible = false

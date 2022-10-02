@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=2]
+[gd_scene load_steps=161 format=2]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/scroll.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://audio/back.wav" type="AudioStream" id=27]
 [ext_resource path="res://cutscenes.gd" type="Script" id=28]
 [ext_resource path="res://assets/cutscenes/opening.png" type="Texture" id=29]
+[ext_resource path="res://assets/cutscenes/ending.png" type="Texture" id=30]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -1825,6 +1826,198 @@ tracks/2/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="Animation" id=127]
+resource_name = "0"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "and there! the melody is restored, and so is peace and joy." ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 314, 111 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("../ColorRect:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath(".:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=128]
+resource_name = "1"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 2, 3 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "thank you, nameless hero." ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 216, 155 ) ]
+}
+
+[sub_resource type="Animation" id=129]
+resource_name = "2"
+length = 0.3
+loop = true
+step = 0.15
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 4, 5 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ "by bucketfish
+for ludum dare 51: every 10 seconds.
+
+thank you for playing!" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../Label:rect_position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 536, 324 ) ]
+}
+
+[sub_resource type="Animation" id=130]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 1 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("../Label:text")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ "" ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
 [sub_resource type="DynamicFont" id=123]
 size = 32
 outline_color = Color( 0.290196, 0.25098, 0.388235, 1 )
@@ -2304,7 +2497,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 4
+frame = 2
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -2397,13 +2590,27 @@ anims/4 = SubResource( 121 )
 anims/RESET = SubResource( 122 )
 anims/fade = SubResource( 124 )
 
+[node name="endanim" type="AnimationPlayer" parent="cutscenes"]
+root_node = NodePath("../end")
+anims/0 = SubResource( 127 )
+anims/1 = SubResource( 128 )
+anims/2 = SubResource( 129 )
+anims/RESET = SubResource( 130 )
+
+[node name="end" type="Sprite" parent="cutscenes"]
+visible = false
+texture = ExtResource( 30 )
+centered = false
+hframes = 2
+vframes = 3
+frame = 1
+
 [node name="Label" type="Label" parent="cutscenes"]
 margin_left = 609.0
 margin_top = 335.0
 margin_right = 937.0
-margin_bottom = 440.0
+margin_bottom = 476.0
 custom_fonts/font = SubResource( 123 )
-text = "scattered in intervals of minor seconds across the world."
 align = 1
 autowrap = true
 
