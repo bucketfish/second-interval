@@ -8,6 +8,8 @@ extends Node2D
 onready var base = get_node("/root/base")
 var taken = false
 
+
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.

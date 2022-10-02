@@ -26,6 +26,7 @@ func _on_toput_put_note(note_num):
 	var noterange = get_range(notevals[note_num-1], notevals[note_num])
 	
 	if base.seconds < noterange.size():
+		
 		base.finish_scroll()
 		return
 	

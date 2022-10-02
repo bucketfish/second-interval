@@ -1292,6 +1292,8 @@ color_ramp = SubResource( 57 )
 [node name="base" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="pianoaudio" type="AudioStreamPlayer" parent="."]
+
 [node name="ui" type="CanvasLayer" parent="."]
 
 [node name="Control" type="Control" parent="ui"]
@@ -1435,7 +1437,7 @@ color = Color( 1, 0.517647, 0.517647, 1 )
 [node name="pianos" type="Node2D" parent="."]
 position = Vector2( -25, 0 )
 
-[node name="piano" parent="pianos" instance=ExtResource( 20 )]
+[node name="1" parent="pianos" instance=ExtResource( 20 )]
 position = Vector2( -5776, 971 )
 
 [node name="pickups-1" type="Node2D" parent="."]
