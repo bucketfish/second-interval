@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=2]
+[gd_scene load_steps=144 format=2]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/scroll.png" type="Texture" id=2]
@@ -26,6 +26,7 @@
 [ext_resource path="res://assets/world/blue.png" type="Texture" id=24]
 [ext_resource path="res://assets/world/purple.png" type="Texture" id=25]
 [ext_resource path="res://audio/final.wav" type="AudioStream" id=26]
+[ext_resource path="res://audio/back.wav" type="AudioStream" id=27]
 
 [sub_resource type="DynamicFont" id=1]
 size = 64
@@ -1512,6 +1513,13 @@ extents = Vector2( 50, 1423.5 )
 [node name="base" type="Node2D"]
 script = ExtResource( 1 )
 
+[node name="back" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 27 )
+volume_db = -7.0
+autoplay = true
+
+[node name="audiotween" type="Tween" parent="."]
+
 [node name="ending" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 26 )
 
@@ -1879,33 +1887,73 @@ position = Vector2( 8600, 191 )
 [node name="player" type="KinematicBody2D" parent="." groups=["player"]]
 light_mask = 2
 material = SubResource( 60 )
-position = Vector2( 9029, -1083 )
+position = Vector2( -6157, 797 )
 script = ExtResource( 15 )
 
 [node name="raycasts" type="Node2D" parent="player"]
 
 [node name="1" type="RayCast2D" parent="player/raycasts"]
 enabled = true
-cast_to = Vector2( 0, 60 )
+cast_to = Vector2( 0, 35 )
 collision_mask = 2
 
 [node name="2" type="RayCast2D" parent="player/raycasts"]
 position = Vector2( -23, 0 )
 enabled = true
-cast_to = Vector2( 0, 60 )
+cast_to = Vector2( 0, 35 )
 collision_mask = 2
 
 [node name="3" type="RayCast2D" parent="player/raycasts"]
 position = Vector2( 23, 0 )
 enabled = true
-cast_to = Vector2( 0, 60 )
+cast_to = Vector2( 0, 35 )
+collision_mask = 2
+
+[node name="4" type="RayCast2D" parent="player/raycasts"]
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 2
+
+[node name="5" type="RayCast2D" parent="player/raycasts"]
+position = Vector2( 0, -22 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 2
+
+[node name="6" type="RayCast2D" parent="player/raycasts"]
+position = Vector2( 0, 22 )
+rotation = 1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 2
+
+[node name="7" type="RayCast2D" parent="player/raycasts"]
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 2
+
+[node name="8" type="RayCast2D" parent="player/raycasts"]
+position = Vector2( 0, -22 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
+collision_mask = 2
+
+[node name="9" type="RayCast2D" parent="player/raycasts"]
+position = Vector2( 0, 22 )
+rotation = -1.5708
+enabled = true
+cast_to = Vector2( 0, 30 )
 collision_mask = 2
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="player"]
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 3
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -1954,6 +2002,9 @@ shadow_gradient_length = 3.0
 [node name="coyote" type="Timer" parent="player"]
 wait_time = 0.2
 one_shot = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="player"]
+volume_db = -5.0
 
 [node name="foreg" type="TileMap" parent="."]
 position = Vector2( 0, 10 )

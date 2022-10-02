@@ -5,8 +5,13 @@ extends KinematicBody2D
 export var scene_id = "player"
 
 onready var raycasts = {
-	"floor":[$"raycasts/1", $"raycasts/2", $"raycasts/3"]
+	"floor":[$"raycasts/1", $"raycasts/2", $"raycasts/3"],
+	"left": [$"raycasts/4", $"raycasts/5", $"raycasts/6"],
+	"right": [$"raycasts/7", $"raycasts/8", $"raycasts/9"]
 	}
+	
+var pianosounds = [preload("res://audio/playersound/1.wav"), preload("res://audio/playersound/2.wav"), preload("res://audio/playersound/3.wav"), preload("res://audio/playersound/4.wav"), preload("res://audio/playersound/5.wav"), preload("res://audio/playersound/6.wav"), preload("res://audio/playersound/7.wav"), preload("res://audio/playersound/8.wav")]
+
 onready var sprite = $AnimatedSprite
 #constants and stuff / physics
 export (int) var speed = 500
@@ -27,10 +32,11 @@ onready var base = get_node("/root/base")
 onready var coyote = $coyote
 var wasonfloor = true
 
-#onready var jumpsound = $AudioStreamPlayer
+var rng = RandomNumberGenerator.new()
+
+onready var jumpsound = $AudioStreamPlayer
 func _ready():
-	#turn on things, set the base
-	pass
+	rng.randomize()
 	
 func get_input(delta):
 	
@@ -48,10 +54,20 @@ func get_input(delta):
 		
 	#settle these variables first
 	var onfloor = raycast("floor")
+	var leftwall = raycast("left")
+	var rightwall = raycast("right")
 	
 	if (onfloor) && !touching:
 		touching = true
-		#jumpsound.play()
+		jumpsound.stream = pianosounds[rng.randi_range(0, 7)]
+		jumpsound.play()
+		
+	if (onfloor || leftwall || rightwall) && !touching:
+		touching = true
+		jumpsound.play()
+		
+	if !onfloor && !leftwall && !rightwall:
+		touching = false
 		
 	#direction of player
 	var dir = 0
@@ -99,8 +115,6 @@ func get_input(delta):
 		if velocity.y >= 0:
 			set_state("falling")
 		
-	
-	#moving down in water
 	
 	#reseting values when hitting floor
 	if onfloor:

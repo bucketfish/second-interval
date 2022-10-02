@@ -13,6 +13,9 @@ onready var ofparticle = $ui/Control/Particle
 onready var player = $player
 onready var startpos = $startpos
 
+onready var audiotween = $audiotween
+onready var backaudio = $back
+
 var curpiano = -1
 
 var audios = [preload("res://audio/part1.wav"), preload("res://audio/part2.wav"), preload("res://audio/part3.wav"), preload("res://audio/part4.wav"), preload("res://audio/part5.wav")]
@@ -45,6 +48,10 @@ func open_scroll():
 	scroll.visible = true
 	state = "scroll"
 	curpiano += 1
+	audiotween.interpolate_property(backaudio, "volume_db", -7, -50, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+	audiotween.start()
+	yield(audiotween, "tween_completed")
+	backaudio.playing = false
 	
 func finish_scroll():
 	state = "listen"
@@ -61,3 +68,6 @@ func finish_scroll():
 		of = 0
 		update_of(0)
 		ofparticle.modulate = colors[curpiano + 1]
+		backaudio.playing = true
+		audiotween.interpolate_property(backaudio, "volume_db", -50, -7, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
+		audiotween.start()
