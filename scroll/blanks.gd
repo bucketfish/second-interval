@@ -32,7 +32,10 @@ func _on_toput_put_note(note_num):
 	if note_num < 22:
 		get_node("note" + str(note_num + 1)).can_put = true
 		
-	if base.seconds < noterange.size():
+	if note_num == 22:
+		get_node("note" + str(note_num)).put()
+		
+	if base.seconds < noterange.size() || note_num == 22:
 		get_node("note" + str(note_num)).can_put = true
 		particles.global_position = Vector2(174, 157)
 		var tween = get_tree().create_tween()

@@ -10,22 +10,27 @@ var state = "play"
 
 onready var ofamount = $ui/Control/of
 onready var ofparticle = $ui/Control/Particle
+onready var player = $player
+onready var startpos = $startpos
 
 var curpiano = -1
 
 var audios = [preload("res://audio/part1.wav"), preload("res://audio/part2.wav"), preload("res://audio/part3.wav"), preload("res://audio/part4.wav"), preload("res://audio/part5.wav")]
 
-var colors = ["#ff8484", "#fee086", "#c4ffb6"]
+var colors = ["#ff8484", "#fee086", "#c4ffb6", "#4887ff", "#986eff"]
 
 onready var particles = $scroll/Particles2D
-
+onready var endingaudio = $ending
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ofparticle.modulate = colors[curpiano + 1]
+#	player.global_position = startpos.global_position
+	
 
 func _input(event):
 	if Input.is_action_pressed("a"):
 		update_counter(10)
+		update_of(10)
 
 func update_counter(new):
 	seconds = new
@@ -47,9 +52,12 @@ func finish_scroll():
 	pianoaudio.play()
 	
 	yield(pianoaudio, "finished")
-	scroll.visible = false
-	particles.visible = false
-	state = "play"
-	of = 0
-	update_of(0)
-	ofparticle.modulate = colors[curpiano + 1]
+	if curpiano == 4:
+		endingaudio.play()
+	else:
+		scroll.visible = false
+		particles.visible = false
+		state = "play"
+		of = 0
+		update_of(0)
+		ofparticle.modulate = colors[curpiano + 1]
