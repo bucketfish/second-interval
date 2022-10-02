@@ -15,6 +15,7 @@ onready var startpos = $startpos
 
 onready var audiotween = $audiotween
 onready var backaudio = $back
+onready var fade = $fade/fade
 
 var curpiano = -1
 
@@ -24,10 +25,14 @@ var colors = ["#ff8484", "#fee086", "#c4ffb6", "#4887ff", "#986eff"]
 
 onready var particles = $scroll/Particles2D
 onready var endingaudio = $ending
+
+onready var cutscenes = $cutscenes
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	ofparticle.modulate = colors[curpiano + 1]
-#	player.global_position = startpos.global_position
+	player.global_position = startpos.global_position
+	cutscenes.open_cutscene()
+	state = "listen"
 	
 
 func _input(event):
@@ -71,3 +76,4 @@ func finish_scroll():
 		backaudio.playing = true
 		audiotween.interpolate_property(backaudio, "volume_db", -50, -7, 2, Tween.TRANS_LINEAR, Tween.EASE_IN_OUT)
 		audiotween.start()
+
