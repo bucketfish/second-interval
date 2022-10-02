@@ -1334,6 +1334,21 @@ text = "0"
 align = 2
 valign = 1
 
+[node name="of" type="Label" parent="ui/Control"]
+margin_left = 839.0
+margin_top = 84.0
+margin_right = 945.0
+margin_bottom = 150.0
+grow_horizontal = 0
+custom_fonts/font = SubResource( 1 )
+text = "0/10 of"
+align = 2
+valign = 1
+
+[node name="Particle" type="Sprite" parent="ui/Control"]
+position = Vector2( 980, 112 )
+texture = ExtResource( 16 )
+
 [node name="scroll" type="CanvasLayer" parent="."]
 visible = false
 
@@ -1598,7 +1613,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 1
+frame = 3
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]

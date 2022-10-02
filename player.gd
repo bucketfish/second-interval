@@ -35,9 +35,14 @@ func _ready():
 func get_input(delta):
 	
 	#if we don't want to take input, don't take input
-	if base.state != "play":
+	if base.state == "pause":
 		velocity.x = 0
 		velocity.y = 0
+		return
+	
+	elif base.state == "scroll" or base.state == "listen":
+		velocity.x = 0
+		velocity.y = clamp(velocity.y + gravity * delta, -1000, 1000)
 		return
 		
 		

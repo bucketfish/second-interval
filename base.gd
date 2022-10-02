@@ -1,21 +1,27 @@
 extends Node2D
 
-var seconds = 9 setget update_counter
+var seconds = 0 setget update_counter
+var of = 0
 onready var blanks = $scroll/blanks
 onready var counter_label = $ui/Control/amount
 onready var scroll = $scroll
 onready var pianoaudio = $pianoaudio
 var state = "play"
 
+onready var ofamount = $ui/Control/of
+onready var ofparticle = $ui/Control/Particle
+
 var curpiano = -1
 
 var audios = [preload("res://audio/part1.wav"), preload("res://audio/part2.wav"), preload("res://audio/part3.wav"), preload("res://audio/part4.wav"), preload("res://audio/part5.wav")]
+
+var colors = ["#ff8484", "#fee086", "#c4ffb6"]
 
 onready var particles = $scroll/Particles2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	ofparticle.modulate = colors[curpiano + 1]
 
 func _input(event):
 	if Input.is_action_pressed("a"):
@@ -24,7 +30,11 @@ func _input(event):
 func update_counter(new):
 	seconds = new
 	counter_label.text = str(new)
+	update_of(of + 1)
 	
+func update_of(val):
+	ofamount.text = str(val) + "/10 of"
+	of = val
 	
 func open_scroll():
 	scroll.visible = true
@@ -40,3 +50,6 @@ func finish_scroll():
 	scroll.visible = false
 	particles.visible = false
 	state = "play"
+	of = 0
+	update_of(0)
+	ofparticle.modulate = colors[curpiano + 1]
