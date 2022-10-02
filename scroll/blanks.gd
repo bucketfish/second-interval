@@ -8,7 +8,11 @@ var toput = preload("res://scroll/toput.tscn")
 var fly = preload("res://scroll/fly.tscn")
 onready var flypos = $"../flypos"
 onready var base = get_node("/root/base")
+onready var pianonote = $"../pianonote"
 
+var pianosounds = [preload("res://audio/piano/-3.wav"), preload("res://audio/piano/-2.wav"), preload("res://audio/piano/-1.wav"), preload("res://audio/piano/0.wav"), preload("res://audio/piano/1.wav"), preload("res://audio/piano/2.wav"), preload("res://audio/piano/3.wav"), preload("res://audio/piano/4.wav"), preload("res://audio/piano/5.wav")]
+
+onready var particles = $"../Particles2D"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	for i in range(0, 23):
@@ -25,16 +29,21 @@ func _ready():
 func _on_toput_put_note(note_num):
 	var noterange = get_range(notevals[note_num-1], notevals[note_num])
 	
-	if base.seconds < noterange.size():
-		
-		base.finish_scroll()
-		return
-	
 	if note_num < 22:
 		get_node("note" + str(note_num + 1)).can_put = true
 		
+	if base.seconds < noterange.size():
+		get_node("note" + str(note_num)).can_put = true
+		particles.global_position = Vector2(174, 157)
+		var tween = get_tree().create_tween()
+		particles.visible = true
+		tween.tween_property(particles, "global_position", Vector2(220 + 33 * note_num, particles.global_position.y), 0.6 * note_num)
+		base.finish_scroll()
+		return
+	
 		
 	if note_num != 0:
+		base.seconds -= noterange.size()
 		# ok get the range of nums between the values.... hm
 		var flies = []
 		
@@ -46,7 +55,7 @@ func _on_toput_put_note(note_num):
 			
 			var tween = get_tree().create_tween()
 			tween.tween_property(cur, "global_position", get_node("../pos/" + str(num)).global_position, 0.2)
-			base.seconds -= 1
+			
 			yield(tween, "finished")
 			
 		for cur in flies:
@@ -57,11 +66,16 @@ func _on_toput_put_note(note_num):
 		for cur in flies:
 			if cur != flies[-1]:
 				cur.queue_free()
-		
+		pianonote.stream = pianosounds[notepos[note_num] + 3]
+		pianonote.play()
 		var tween = get_tree().create_tween()
 		tween.tween_property(flies[-1], "global_position", Vector2(220 + 33 * note_num, flies[-1].global_position.y), 0.2)
 		yield(tween, "finished")
 		flies[-1].queue_free()
+		
+	if note_num == 0:
+		pianonote.stream = pianosounds[notepos[note_num] + 3]
+		pianonote.play()
 		
 	get_node("note" + str(note_num)).put()
 	

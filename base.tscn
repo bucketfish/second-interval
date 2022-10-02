@@ -1,4 +1,4 @@
-[gd_scene load_steps=136 format=2]
+[gd_scene load_steps=139 format=2]
 
 [ext_resource path="res://base.gd" type="Script" id=1]
 [ext_resource path="res://assets/interface/scroll.png" type="Texture" id=2]
@@ -27,6 +27,24 @@
 [sub_resource type="DynamicFont" id=1]
 size = 64
 font_data = ExtResource( 5 )
+
+[sub_resource type="Curve" id=113]
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 1, 0.261948 ), -1.30381, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=114]
+curve = SubResource( 113 )
+
+[sub_resource type="ParticlesMaterial" id=115]
+flag_rotate_y = true
+flag_disable_z = true
+gravity = Vector3( 0, 0, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+angle = 396.0
+angle_random = 0.2
+scale = 0.9
+scale_random = 0.61
+scale_curve = SubResource( 114 )
 
 [sub_resource type="TileSet" id=59]
 0/name = "backg.png 0"
@@ -1394,6 +1412,15 @@ position = Vector2( 139, 483 )
 [node name="-7" type="Position2D" parent="scroll/pos"]
 position = Vector2( 176, 499 )
 
+[node name="pianonote" type="AudioStreamPlayer" parent="scroll"]
+
+[node name="Particles2D" type="Particles2D" parent="scroll"]
+visible = false
+position = Vector2( 208, 191 )
+local_coords = false
+process_material = SubResource( 115 )
+texture = ExtResource( 3 )
+
 [node name="backg" type="TileMap" parent="."]
 position = Vector2( 0, 10 )
 scale = Vector2( 2, 2 )
@@ -1439,6 +1466,12 @@ position = Vector2( -25, 0 )
 
 [node name="1" parent="pianos" instance=ExtResource( 20 )]
 position = Vector2( -5776, 971 )
+
+[node name="2" parent="pianos" instance=ExtResource( 20 )]
+position = Vector2( -1280, 971 )
+
+[node name="3" parent="pianos" instance=ExtResource( 20 )]
+position = Vector2( 3208, 971 )
 
 [node name="pickups-1" type="Node2D" parent="."]
 
@@ -1565,7 +1598,7 @@ collision_mask = 2
 material = SubResource( 61 )
 scale = Vector2( 0.75, 0.75 )
 frames = SubResource( 51 )
-frame = 6
+frame = 1
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player"]
@@ -1590,7 +1623,7 @@ tile_set = SubResource( 112 )
 format = 1
 tile_data = PoolIntArray( -458795, 2, 0, -458738, 1, 0, -393215, 2, 0, -262181, 5, 0, -196635, 5, 0, -196621, 10, 0, -196614, 1, 0, -262136, 6, 0, -262123, 7, 0, -131120, 9, 0, -65555, 5, 0, -131072, 4, 0, -65521, 6, 0, 65494, 0, 0, 65511, 6, 0, 65526, 6, 0, 65532, 6, 0, 4, 5, 0, 131040, 10, 0, 262128, 10, 0, 196617, 0, 0, 327644, 5, 0, 327652, 3, 0, 327670, 9, 0, 262147, 11, 0, 262163, 10, 0, 393177, 11, 0, 458704, 1, 0, 458731, 8, 0, 524286, 3, 0, 524301, 0, 0 )
 
-[node name="Particles2D" type="Particles2D" parent="player"]
+[node name="playerparticles" type="Particles2D" parent="player"]
 show_behind_parent = true
 material = SubResource( 62 )
 amount = 16
