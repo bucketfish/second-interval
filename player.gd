@@ -9,7 +9,7 @@ onready var raycasts = {
 	}
 onready var sprite = $AnimatedSprite
 #constants and stuff / physics
-export (int) var speed = 400
+export (int) var speed = 500
 export (int) var gravity = 2800
 export (float, 0, 1.0) var friction = 0.3
 export (float, 0, 1.0) var acceleration = 0.2

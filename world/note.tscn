@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/world/note.png" type="Texture" id=1]
 [ext_resource path="res://assets/player/light.png" type="Texture" id=2]
@@ -33,6 +33,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [ Vector2( 0.1, 0.1 ) ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.839216, 0.839216, 1 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 resource_name = "idle"
@@ -49,6 +61,39 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
 "values": [ Vector2( 0, -5 ), Vector2( 0, 5 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 0.839216, 0.839216, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "idle"
+length = 2.5
+loop = true
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.504344, 1.00386, 1.53089, 2.00772 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 0.839216, 0.839216, 1 ), Color( 0.988235, 0.843137, 0.678431, 1 ), Color( 0.768627, 1, 0.713726, 1 ), Color( 0.623529, 0.866667, 0.933333, 1 ), Color( 0.584314, 0.627451, 1, 1 ) ]
 }
 
 [node name="note" type="Node2D"]
@@ -73,5 +118,10 @@ offset = Vector2( 0, -5 )
 autoplay = "idle"
 anims/RESET = SubResource( 3 )
 anims/idle = SubResource( 2 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+autoplay = "idle"
+anims/RESET = SubResource( 4 )
+anims/idle = SubResource( 5 )
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]

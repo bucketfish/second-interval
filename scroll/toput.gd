@@ -18,8 +18,8 @@ func _ready():
 
 func _on_TextureButton_pressed():
 	if can_put:
-		
 		emit_signal("put_note", note_num)
+		can_put = false
 		
 func put():
 	anim.play("put")
